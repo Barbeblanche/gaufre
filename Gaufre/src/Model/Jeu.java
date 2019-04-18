@@ -33,4 +33,31 @@ public class Jeu {
 		
 		return (coupPossible(l,c));
 	}
+
+	public void affiche() {
+		String s = "";
+		for (int l = 0; l < 10; l++) {
+			s += "\n";
+			for (int c = 0; c < 10; c++) {
+				switch(plateau[l][c]) {
+				
+				case(REMPLIE):
+					s += "| O ";
+					break;
+				
+				case(VIDE):
+					s += "|   ";
+					break;
+					
+				case(POISON):
+					s += "| X ";
+				break;
+				}
+			}
+		}
+		
+		System.out.println(s);
+	}
+	
+
 }
