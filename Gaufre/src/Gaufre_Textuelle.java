@@ -1,20 +1,32 @@
 import java.util.Scanner;
 
+import Controlleur.Controleur;
 import Model.Jeu;
 
 public class Gaufre_Textuelle {
+	final static int ANNULER = -1;
+	final static int REFAIRE = -2;
+	final static int SAVE = -3;
+	final static int LOAD = -4;
+	
 	public static void main(String args[]) {
-		Jeu jeu = new Jeu();
+		Controleur controleur = new Controleur();
 		
 		System.out.println("Veuillez choisir une case : ");
 		Scanner sc = new Scanner(System.in);
 	    int l, c;
 	    
 	    while (true) {
-		    jeu.affiche();
+		    controleur.affiche();
 		    l = sc.nextInt();
 		    c = sc.nextInt();
-		    jeu.joue(l, c);
+		    
+		    if (l == SAVE || c == SAVE) {
+		    	
+		    } else if (l == LOAD || c == LOAD) {
+		    	
+		    }
+		    controleur.joue(l, c);
 	    }
 	}
 }

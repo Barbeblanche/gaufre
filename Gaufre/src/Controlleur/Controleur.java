@@ -1,5 +1,9 @@
 package Controlleur;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import com.sun.javafx.application.LauncherImpl;
 
 import Vue.InterfaceGraphique;
@@ -13,5 +17,18 @@ public class Controleur {
 		jeu = new Jeu();
 	}
 	
+	public boolean joue(Coup coup) {
+		jeu.joue(coup);
+	}
 	
+	public void affiche() {
+		jeu.affiche();
+	}
+
+	public void save() throws IOException {
+	   FileWriter fileWriter = new FileWriter("Save");
+	   PrintWriter printWriter = new PrintWriter(fileWriter);
+	   
+	   printWriter.close();
+	}
 }
