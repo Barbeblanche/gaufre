@@ -32,7 +32,11 @@ public class Gaufre_Textuelle {
 		    	controleur.refaire();
 		    }else {
 		    	Coup coup = new Coup(l,c);
-			    controleur.joue(coup);
+			    if (controleur.joue(coup) == 1) {
+			    	System.out.println("Partie terminée!");
+			    	return;
+			    }
+			    
 		    }
 		    
 		    

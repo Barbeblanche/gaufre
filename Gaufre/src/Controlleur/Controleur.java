@@ -18,7 +18,7 @@ public class Controleur {
 		jeu = new Jeu();
 	}
 	
-	public boolean joue(Coup coup) {
+	public int joue(Coup coup) {
 		return (jeu.joue(coup));
 	}
 	
