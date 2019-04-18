@@ -27,8 +27,16 @@ public class Controleur {
 		jeu = new Jeu();
 	}
 	
-	public boolean joue(Coup coup) {
+	public int joue(Coup coup) {
 		return (jeu.joue(coup));
+	}
+	
+	public void precedent() {
+		jeu.precedent();
+	}
+	
+	public void refaire() {
+		jeu.refaire();
 	}
 	
 	public void affiche() {

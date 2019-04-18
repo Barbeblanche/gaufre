@@ -9,12 +9,13 @@ public class Jeu {
 	
 	public int[][] plateau;
 	Stack<Coup> coups;
+	Coup dernierCoup;
 	
 	public Jeu() {
 		plateau = new int[10][10];
 		coups = new Stack<Coup>();
 		initTableau(plateau,10,10);
-		
+		dernierCoup = null;
 	}
 	public void initTableau(int [][] tab,int x,int y) {
 		for (int i = 0; i < x; i ++) {
@@ -25,31 +26,50 @@ public class Jeu {
 		tab[0][0] = POISON;
 	}
 	private boolean coupPossible (Coup coup) {
-		return (plateau[coup.l][coup.c] == REMPLIE);
+		return (plateau[coup.l][coup.c] == REMPLIE || plateau[coup.l][coup.c] == POISON);
 	}
 	
-	public boolean joue(Coup coup) {
+	public int joue(Coup coup) {
+		int res=-1;
 		if (coupPossible(coup)) {
 			coups.push(coup);
-			for (int i = coup.l; i < 10; i++) {
-				for (int j = coup.c; j < 10; j++) {
-					plateau[i][j] = VIDE;
+			if (plateau[coup.l][coup.c]== POISON) {
+				res = 1;
+			}else {
+				for (int i = coup.l; i < 10; i++) {
+					for (int j = coup.c; j < 10; j++) {
+						plateau[i][j] = VIDE;
+						res = 0;
+					}
 				}
 			}
+			
+			
 		}
+		return res;
 		
-		return (coupPossible(coup));
 	}
 	
 	public void precedent() {
 		if (!coups.empty()) {
-			coups.pop();
+			dernierCoup = coups.pop();
 			initTableau(plateau,10,10);
-			for (Coup c : coups) {
-				joue(c);
+			Stack<Coup> tmp = new Stack<Coup>();
+			tmp = coups;
+			while (!tmp.empty()) {
+				joue(tmp.pop());
 			}
+		}else {
+			System.out.println("Jouer un coup avant");
 		}
 	}
+	
+	public void refaire() {
+		if (dernierCoup != null) {
+			joue(dernierCoup);
+		}
+	}
+	
 
 	public void affiche() {
 		String s = "";
