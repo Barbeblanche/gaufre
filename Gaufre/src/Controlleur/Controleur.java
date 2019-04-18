@@ -22,6 +22,10 @@ public class Controleur {
 		return (jeu.joue(coup));
 	}
 	
+	public void precedent() {
+		jeu.precedent();
+	}
+	
 	public void affiche() {
 		jeu.affiche();
 	}

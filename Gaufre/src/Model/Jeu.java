@@ -45,9 +45,13 @@ public class Jeu {
 		if (!coups.empty()) {
 			coups.pop();
 			initTableau(plateau,10,10);
-			for (Coup c : coups) {
-				joue(c);
+			Stack<Coup> tmp = new Stack<Coup>();
+			tmp = coups;
+			while (!tmp.empty()) {
+				joue(tmp.pop());
 			}
+		}else {
+			System.out.println("Jouer un coup avant");
 		}
 	}
 

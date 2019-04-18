@@ -18,7 +18,7 @@ public class Gaufre_Textuelle {
 	    int l, c;
 	    
 	    while (true) {
-		    controleur.affiche();
+	    	controleur.affiche();
 		    l = sc.nextInt();
 		    c = sc.nextInt();
 		    
@@ -26,9 +26,17 @@ public class Gaufre_Textuelle {
 		    	
 		    } else if (l == LOAD || c == LOAD) {
 		    	
+		    }else if (l== ANNULER || c == ANNULER) {
+		    	System.out.println("Test");
+		    	controleur.precedent();
+		    }else if (l== REFAIRE || c == REFAIRE) {
+		    	
+		    }else {
+		    	Coup coup = new Coup(l,c);
+			    controleur.joue(coup);
 		    }
-		    Coup coup = new Coup(l,c);
-		    controleur.joue(coup);
+		    
+		    
 	    }
 	}
 }
