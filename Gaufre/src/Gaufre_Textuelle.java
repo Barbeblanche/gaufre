@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+import Model.Coup;
 import Model.Jeu;
 
 public class Gaufre_Textuelle {
@@ -14,7 +15,8 @@ public class Gaufre_Textuelle {
 		    jeu.affiche();
 		    l = sc.nextInt();
 		    c = sc.nextInt();
-		    jeu.joue(l, c);
+		    Coup coup = new Coup(l,c);
+		    jeu.joue(coup);
 	    }
 	}
 }
