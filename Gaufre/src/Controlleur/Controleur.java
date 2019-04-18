@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import com.sun.javafx.application.LauncherImpl;
 
 import Vue.InterfaceGraphique;
+import Model.Coup;
 import Model.Jeu;
 import javafx.application.Application;
 
@@ -18,7 +19,7 @@ public class Controleur {
 	}
 	
 	public boolean joue(Coup coup) {
-		jeu.joue(coup);
+		return (jeu.joue(coup));
 	}
 	
 	public void affiche() {

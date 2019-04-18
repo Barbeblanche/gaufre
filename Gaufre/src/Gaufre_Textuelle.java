@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 import Controlleur.Controleur;
+import Model.Coup;
 import Model.Jeu;
 
 public class Gaufre_Textuelle {
@@ -26,7 +27,8 @@ public class Gaufre_Textuelle {
 		    } else if (l == LOAD || c == LOAD) {
 		    	
 		    }
-		    controleur.joue(l, c);
+		    Coup coup = new Coup(l,c);
+		    controleur.joue(coup);
 	    }
 	}
 }

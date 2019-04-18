@@ -1,37 +1,54 @@
 package Model;
 
+import java.util.Stack;
+
 public class Jeu {
 	final int REMPLIE = 1;
 	final int VIDE = 0;
 	final int POISON = 2;
 	
 	int[][] plateau;
-	
+	Stack<Coup> coups;
 	
 	public Jeu() {
 		plateau = new int[10][10];
-		for (int i = 0; i < 10; i ++) {
-			for (int j = 0; j < 10; j++) {
-				plateau[i][j] = REMPLIE;
+		coups = new Stack<Coup>();
+		initTableau(plateau,10,10);
+		
+	}
+	public void initTableau(int [][] tab,int x,int y) {
+		for (int i = 0; i < x; i ++) {
+			for (int j = 0; j < y; j++) {
+				tab[i][j] = REMPLIE;
 			}
 		}
-		plateau[0][0] = POISON;
+		tab[0][0] = POISON;
+	}
+	private boolean coupPossible (Coup coup) {
+		return (plateau[coup.l][coup.c] == REMPLIE);
 	}
 	
-	private boolean coupPossible (int l, int c) {
-		return (plateau[l][c] == REMPLIE);
-	}
-	
-	public boolean joue(int l, int c) {
-		if (coupPossible(l,c)) {
-			for (int i = l; i < 10; i++) {
-				for (int j = c; j < 10; j++) {
+	public boolean joue(Coup coup) {
+		if (coupPossible(coup)) {
+			coups.push(coup);
+			for (int i = coup.l; i < 10; i++) {
+				for (int j = coup.c; j < 10; j++) {
 					plateau[i][j] = VIDE;
 				}
 			}
 		}
 		
-		return (coupPossible(l,c));
+		return (coupPossible(coup));
+	}
+	
+	public void precedent() {
+		if (!coups.empty()) {
+			coups.pop();
+			initTableau(plateau,10,10);
+			for (Coup c : coups) {
+				joue(c);
+			}
+		}
 	}
 
 	public void affiche() {
