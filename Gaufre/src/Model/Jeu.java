@@ -22,7 +22,7 @@ public class Jeu {
 		return (plateau[l][c] == REMPLIE);
 	}
 	
-	public void joue(int l, int c) {
+	public boolean joue(int l, int c) {
 		if (coupPossible(l,c)) {
 			for (int i = l; i < 10; i++) {
 				for (int j = c; j < 10; j++) {
@@ -30,5 +30,7 @@ public class Jeu {
 				}
 			}
 		}
+		
+		return (coupPossible(l,c));
 	}
 }
