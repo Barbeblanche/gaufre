@@ -21,7 +21,7 @@ public class Gaufre_Textuelle {
 	    controleur.affiche();
 
 	    while (true) {
-	    	controleur.affiche();
+	    	
 		    l = sc.nextInt();
 		    c = sc.nextInt();
 		    
@@ -37,10 +37,12 @@ public class Gaufre_Textuelle {
 		    
 		    else if (l== ANNULER || c == ANNULER) {
 		    	controleur.precedent();
+		    	controleur.affiche();
 		    }
 		    
 		    else if (l== REFAIRE || c == REFAIRE) {
 		    	controleur.refaire();
+		    	controleur.affiche();
 		    }
 		    
 		    else {
@@ -48,7 +50,9 @@ public class Gaufre_Textuelle {
 			    if (controleur.joue(coup) == 1) {
 			    	System.out.println("Partie terminée!");
 			    	return;
-			    }  
+			    } else {
+			    	controleur.affiche();
+			    }
 		    }
 	  
 	    }

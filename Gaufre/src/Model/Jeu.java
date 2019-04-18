@@ -8,8 +8,8 @@ public class Jeu {
 	final int POISON = 2;
 	
 	public int[][] plateau;
-	Stack<Coup> coups;
-	Coup dernierCoup;
+	public Stack<Coup> coups;
+	public Coup dernierCoup;
 	
 	public Jeu() {
 		plateau = new int[10][10];
@@ -67,6 +67,8 @@ public class Jeu {
 	public void refaire() {
 		if (dernierCoup != null) {
 			joue(dernierCoup);
+		}else {
+			System.out.println("Annule un coup avant");
 		}
 	}
 	

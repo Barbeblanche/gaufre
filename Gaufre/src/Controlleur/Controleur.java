@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
+import java.util.Stack;
 
 import com.sun.javafx.application.LauncherImpl;
 
@@ -20,10 +21,11 @@ import Model.Jeu;
 import javafx.application.Application;
 
 public class Controleur {
-	final static String save = "/home/p/pontonnr/git/Gaufre/Gaufre/config/Save";
+	final static String save = "/home/s/salamanl/git/gaufre/Gaufre/config/Save";
 	Jeu jeu;
 	
 	public Controleur() {
+		
 		jeu = new Jeu();
 	}
 	
@@ -77,5 +79,7 @@ public class Controleur {
 	    	}
 	    } 
 	    jeu.plateau = plateau;
+	    jeu.coups = new Stack<Coup>();
+	    jeu.dernierCoup = null;
 	}
 }
