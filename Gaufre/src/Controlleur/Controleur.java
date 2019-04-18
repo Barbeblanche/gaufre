@@ -26,6 +26,10 @@ public class Controleur {
 		jeu.precedent();
 	}
 	
+	public void refaire() {
+		jeu.refaire();
+	}
+	
 	public void affiche() {
 		jeu.affiche();
 	}

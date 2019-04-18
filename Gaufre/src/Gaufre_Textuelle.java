@@ -27,10 +27,9 @@ public class Gaufre_Textuelle {
 		    } else if (l == LOAD || c == LOAD) {
 		    	
 		    }else if (l== ANNULER || c == ANNULER) {
-		    	System.out.println("Test");
 		    	controleur.precedent();
 		    }else if (l== REFAIRE || c == REFAIRE) {
-		    	
+		    	controleur.refaire();
 		    }else {
 		    	Coup coup = new Coup(l,c);
 			    controleur.joue(coup);

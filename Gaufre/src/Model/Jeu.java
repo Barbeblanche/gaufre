@@ -9,12 +9,13 @@ public class Jeu {
 	
 	int[][] plateau;
 	Stack<Coup> coups;
+	Coup dernierCoup;
 	
 	public Jeu() {
 		plateau = new int[10][10];
 		coups = new Stack<Coup>();
 		initTableau(plateau,10,10);
-		
+		dernierCoup = null;
 	}
 	public void initTableau(int [][] tab,int x,int y) {
 		for (int i = 0; i < x; i ++) {
@@ -43,7 +44,7 @@ public class Jeu {
 	
 	public void precedent() {
 		if (!coups.empty()) {
-			coups.pop();
+			dernierCoup = coups.pop();
 			initTableau(plateau,10,10);
 			Stack<Coup> tmp = new Stack<Coup>();
 			tmp = coups;
@@ -52,6 +53,12 @@ public class Jeu {
 			}
 		}else {
 			System.out.println("Jouer un coup avant");
+		}
+	}
+	
+	public void refaire() {
+		if (dernierCoup != null) {
+			joue(dernierCoup);
 		}
 	}
 
