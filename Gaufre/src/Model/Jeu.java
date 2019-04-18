@@ -7,7 +7,7 @@ public class Jeu {
 	final int VIDE = 0;
 	final int POISON = 2;
 	
-	int[][] plateau;
+	public int[][] plateau;
 	Stack<Coup> coups;
 	
 	public Jeu() {
