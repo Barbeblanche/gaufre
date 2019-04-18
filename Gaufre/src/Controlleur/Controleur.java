@@ -3,11 +3,15 @@ package Controlleur;
 import com.sun.javafx.application.LauncherImpl;
 
 import Vue.InterfaceGraphique;
+import Model.Jeu;
 import javafx.application.Application;
 
-public class Main {
+public class Controleur {
+	Jeu jeu;
 	
-	public static void main(String args[]) {
-		InterfaceGraphique.launch(InterfaceGraphique.class, args);
+	public Controleur() {
+		jeu = new Jeu();
 	}
+	
+	
 }
