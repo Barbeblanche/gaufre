@@ -3,16 +3,21 @@ package Vue;
 import java.util.ArrayList;
 
 import javafx.application.Application;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
@@ -37,18 +42,39 @@ public class InterfaceGraphique extends Application {
 	}
 	
 	private void initPlateauGauche() {
-		VBox box = new VBox();
-		ArrayList<Rectangle> rectangles = new ArrayList<Rectangle>();
+		Rectangle[][] rectangles = new Rectangle[10][10];
+		TilePane pane = new TilePane();
+		
+		pane.setHgap(1);
+		pane.setVgap(1);
 		
 		for (int i = 0; i < 10; i++) {
-			Rectangle r = new Rectangle(HEIGHT/10, (WIDTH/5)*4/10);
-			rectangles.add(r);
+			for (int j = 0; j < 10; j++) {
+				Rectangle r = new Rectangle();
+				r.setHeight(50);
+				r.setWidth(50);
+				
+				r.setFill(Color.DARKGOLDENROD);
+				
+				rectangles[i][j] = r;
+				r.setOnMousePressed(new EventHandler<MouseEvent>() {
+
+					@Override
+					public void handle(MouseEvent event) {
+						double i = event.getX();
+						double j = event.getY();
+						
+						System.out.println(i + "  " + j);
+						
+					}
+					
+				});
+				pane.getChildren().add(r);
+			}
 		}
+	
 		
-		for (Rectangle r : rectangles)
-			box.getChildren().add(r);
-		
-		root.setLeft(box);
+		root.setLeft(pane);
 		
 	}
 	
