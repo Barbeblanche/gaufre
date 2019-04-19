@@ -1,5 +1,10 @@
-package Controlleur;
+package Controler;
 
-public class IA {
+import Model.*;
 
+public abstract class IA {
+	Jeu j;
+	Controler control;
+	
+	abstract public Coup getCoup();
 }

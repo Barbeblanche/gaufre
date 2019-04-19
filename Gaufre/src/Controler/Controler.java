@@ -1,35 +1,30 @@
 package Controler;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.Stack;
 
-import com.sun.javafx.application.LauncherImpl;
-
-import Vue.InterfaceGraphique;
 import Model.Coup;
 import Model.Jeu;
-import javafx.application.Application;
 
 public class Controler {
-	final static String save = "/home/s/salamanl/git/gaufre/Gaufre/config/Save";
+	final static String save = "/home/s/saullel/git/gaufre/Gaufre/config/Save";
 	Jeu jeu;
+	IA_Random ia;
 	
 	public Controler() {
-		
 		jeu = new Jeu();
+		ia = new IA_Random();
 	}
 	
 	public int joue(Coup coup) {
-		return (jeu.joue(coup));
+		int res = jeu.joue(coup);
+		//Coup coupIA = ia.getCoup();
+		
+		return res;
 	}
 	
 	public boolean coupPossible(Coup coup) {
@@ -66,7 +61,8 @@ public class Controler {
 	
 	public void load() throws IOException {
 		File file = new File(save); 
-	    Scanner sc = new Scanner(file); 
+	    @SuppressWarnings("resource")
+		Scanner sc = new Scanner(file); 
 	  
 	    int plateau[][] = new int[10][10];
 	    int l = 0, c = 0;

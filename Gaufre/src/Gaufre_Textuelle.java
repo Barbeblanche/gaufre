@@ -14,6 +14,7 @@ public class Gaufre_Textuelle {
 	public static void main(String args[]) throws IOException {
 		Controler controleur = new Controler();
 		System.out.println("Veuillez choisir une case : ");
+		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
 	    int l, c;
 	    
