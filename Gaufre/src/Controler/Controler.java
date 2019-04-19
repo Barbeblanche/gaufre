@@ -27,6 +27,10 @@ public class Controler {
 		return res;
 	}
 	
+	private void click(Coup coup) {
+		jeu.joue(coup);
+	}
+	
 	public boolean coupPossible(Coup coup) {
 		return (jeu.coupPossible(coup));
 	}

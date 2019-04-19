@@ -2,6 +2,9 @@ package Vue;
 
 import java.util.ArrayList;
 
+import Controler.Controler;
+import Model.Coup;
+import Model.Jeu;
 import javafx.application.Application;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -25,6 +28,8 @@ public class InterfaceGraphique extends Application {
 	private static final int WIDTH = 1000;
 	private static final int HEIGHT = 600;
 	BorderPane root = new BorderPane();
+	Controler controler;
+	Jeu jeu;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -45,8 +50,8 @@ public class InterfaceGraphique extends Application {
 		Rectangle[][] rectangles = new Rectangle[10][10];
 		TilePane pane = new TilePane();
 		
-		pane.setHgap(1);
-		pane.setVgap(1);
+		pane.setHgap(3);
+		pane.setVgap(3);
 		
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
@@ -57,21 +62,24 @@ public class InterfaceGraphique extends Application {
 				r.setFill(Color.DARKGOLDENROD);
 				
 				rectangles[i][j] = r;
-				r.setOnMousePressed(new EventHandler<MouseEvent>() {
-
-					@Override
-					public void handle(MouseEvent event) {
-						double i = event.getX();
-						double j = event.getY();
-						
-						System.out.println(i + "  " + j);
-						
-					}
-					
-				});
+				
 				pane.getChildren().add(r);
 			}
 		}
+		
+		pane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				int l = (int) event.getX() / 50;
+				int c = (int) event.getY() / 50;
+				System.out.println("i = " + l + " j = " + c);
+
+				Coup coup = new Coup(l, c);
+				controler.joue(coup);
+				
+			}
+		});
 	
 		
 		root.setLeft(pane);
