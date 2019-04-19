@@ -1,5 +1,4 @@
-package Controlleur;
-
+package Controler;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -20,17 +19,21 @@ import Model.Coup;
 import Model.Jeu;
 import javafx.application.Application;
 
-public class Controleur {
+public class Controler {
 	final static String save = "/home/s/salamanl/git/gaufre/Gaufre/config/Save";
 	Jeu jeu;
 	
-	public Controleur() {
+	public Controler() {
 		
 		jeu = new Jeu();
 	}
 	
 	public int joue(Coup coup) {
 		return (jeu.joue(coup));
+	}
+	
+	public boolean coupPossible(Coup coup) {
+		return (jeu.coupPossible(coup));
 	}
 	
 	public void precedent() {
