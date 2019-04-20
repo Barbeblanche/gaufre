@@ -8,14 +8,10 @@ public class Jeu {
 	public final int POISON = 2;
 	
 	public int[][] plateau;
-	public Stack<Coup> coups;
-	public Coup dernierCoup;
 	
 	public Jeu() {
 		plateau = new int[10][10];
-		coups = new Stack<Coup>();
 		initTableau(plateau,10,10);
-		dernierCoup = null;
 	}
 	
 	public void initTableau(int [][] tab,int x,int y) {
@@ -32,7 +28,7 @@ public class Jeu {
 	}
 	
 	
-	public int joue(Coup coup) {
+	public int joue(Coup coup,Stack<Coup> coups) {
 		int res=-1;
 		if (coupPossible(coup)) {
 			coups.push(coup);
@@ -53,23 +49,23 @@ public class Jeu {
 		
 	}
 	
-	public void precedent() {
+	public void precedent(Stack<Coup> coups,Coup dernierCoup) {
 		if (!coups.empty()) {
 			dernierCoup = coups.pop();
 			initTableau(plateau,10,10);
 			Stack<Coup> tmp = new Stack<Coup>();
 			tmp = coups;
 			while (!tmp.empty()) {
-				joue(tmp.pop());
+				joue(tmp.pop(),coups);
 			}
 		}else {
 			System.out.println("Jouer un coup avant");
 		}
 	}
 	
-	public void refaire() {
+	public void refaire(Coup dernierCoup,Stack<Coup> coups) {
 		if (dernierCoup != null) {
-			joue(dernierCoup);
+			joue(dernierCoup,coups);
 		}else {
 			System.out.println("Annule un coup avant");
 		}

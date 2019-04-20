@@ -44,20 +44,20 @@ public class Controler {
 		return res;
 	}
 	
-	private void click(Coup coup) {
+	/*private void click(Coup coup) {
 		getJeu().joue(coup);
-	}
+	}*/
 	
 	public boolean coupPossible(Coup coup) {
 		return (getJeu().coupPossible(coup));
 	}
 	
 	public void precedent() {
-		getJeu().precedent();
+		courant.precedent();
 	}
 	
 	public void refaire() {
-		getJeu().refaire();
+		courant.refaire();
 	}
 	
 	public void affiche() {
@@ -99,8 +99,10 @@ public class Controler {
 	    	}
 	    } 
 	    getJeu().plateau = plateau;
-	    getJeu().coups = new Stack<Coup>();
-	    getJeu().dernierCoup = null;
+	    j1.coups = new Stack<Coup>();
+	    j2.coups = new Stack<Coup>();
+	    j1.dernierCoup = null;
+	    j2.dernierCoup = null;
 	}
 	public Jeu getJeu() {
 		return jeu;
