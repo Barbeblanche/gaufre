@@ -32,15 +32,13 @@ public class InterfaceGraphique extends Application {
 	private static final int HEIGHT = 600;
 	BorderPane root = new BorderPane();
 	Controler controler;
-	Jeu jeu;
 	Rectangle[][] plateauGraphique;
-	
+	Text joueurCourant;
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("Gaufre");
 		primaryStage.setFullScreen(false);
-		jeu = new Jeu();
-		controler = new Controler(jeu);
+		controler = new Controler();
 		initPlateauGauche();
 		initMenuDroite();
 		
@@ -84,16 +82,17 @@ public class InterfaceGraphique extends Application {
 				int l = (int) event.getY() / 50;
 				int c = (int) event.getX() / 50;
 				
-				System.out.println("i = " + l + " j = " + c);
+				//System.out.println("i = " + l + " j = " + c);
 
 				Coup coup = new Coup(l, c);
 				if (controler.joue(coup) == 1) {
 					pane.getChildren().clear();
-					Text t = new Text(200, 300, "Partie Terminée !");
+					Text t = new Text(200, 300, "Partie Terminée ! " + controler.getCourant().getNom() + " a perdu !" );
 					t.setFont(new Font(15));
 					pane.getChildren().add(t);
 				}
 				majPlateau();
+				joueurCourant.setText("Joueur courant : \n" + controler.getCourant().getNom());
 			}
 		});
 	
@@ -106,9 +105,9 @@ public class InterfaceGraphique extends Application {
 	private void majPlateau() {
 		for (int i =0; i<10; i++) {
 			for (int j =0; j<10; j++) {
-				if (jeu.plateau[i][j] == jeu.VIDE) {
-					plateauGraphique[i][j].setFill(Color.WHITE);
-				}else if (jeu.plateau[i][j] == jeu.REMPLIE) {
+				if (controler.getJeu().plateau[i][j] == controler.getJeu().VIDE) {
+					plateauGraphique[i][j].setFill(Color.LIGHTGREY);
+				}else if (controler.getJeu().plateau[i][j] == controler.getJeu().REMPLIE) {
 					plateauGraphique[i][j].setFill(Color.DARKGOLDENROD);
 				}
 			}
@@ -126,6 +125,8 @@ public class InterfaceGraphique extends Application {
 	    
 	    menu.setSpacing(10);
 		
+	    joueurCourant = new Text("Joueur courant : \n" + controler.getCourant().getNom());
+	    
 		Button b_annuler = new Button("Annuler");
 		b_annuler.setAlignment(Pos.CENTER);
 		b_annuler.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -154,7 +155,7 @@ public class InterfaceGraphique extends Application {
 		Button b_load = new Button("Charger");
 		b_load.setAlignment(Pos.CENTER);
 		
-		
+		menu.getChildren().add(joueurCourant);
 		menu.getChildren().add(b_annuler);
 		menu.getChildren().add(b_refaire);
 		menu.getChildren().add(b_save);

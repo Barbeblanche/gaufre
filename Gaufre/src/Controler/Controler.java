@@ -1,55 +1,67 @@
 package Controler;
 
 import java.io.File;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.Stack;
 
-import Model.Coup;
-import Model.Jeu;
+import Model.*;
+
 
 public class Controler {
 	final static String save = "/home/s/saullel/git/gaufre/Gaufre/config/Save";
-	Jeu jeu;
+	private Jeu jeu;
 	IA_Random ia;
-	
+	Joueur j1,j2;
+	private Joueur courant;
 	public Controler() {
-		jeu = new Jeu();
+		setJeu(new Jeu());
 		ia = new IA_Random();
+		j1 = new Joueur("Joueur 1",jeu);
+		j2 = new Joueur("Joueur 2",jeu);
+		setCourant(j1);
 	}
 	public Controler(Jeu j) {
-		jeu = j;
+		setJeu(j);
 		ia = new IA_Random();
+		setCourant(j1);
 	}
 	
 	
 	public int joue(Coup coup) {
-		int res = jeu.joue(coup);
-		//Coup coupIA = ia.getCoup();
-		
+		int res = getCourant().jouer(coup);
+		if (res == 0) {
+			if (getCourant() == j1) {
+				setCourant(j2);
+			}else {
+				setCourant(j1);
+			}
+		}
+		System.out.println(getCourant().getNom());
 		return res;
 	}
 	
 	private void click(Coup coup) {
-		jeu.joue(coup);
+		getJeu().joue(coup);
 	}
 	
 	public boolean coupPossible(Coup coup) {
-		return (jeu.coupPossible(coup));
+		return (getJeu().coupPossible(coup));
 	}
 	
 	public void precedent() {
-		jeu.precedent();
+		getJeu().precedent();
 	}
 	
 	public void refaire() {
-		jeu.refaire();
+		getJeu().refaire();
 	}
 	
 	public void affiche() {
-		jeu.affiche();
+		getJeu().affiche();
 	}
 
 	public void save() throws IOException {
@@ -60,7 +72,7 @@ public class Controler {
 	    String s = "";
 	    for(int i = 0; i < 10; i++) {
 	    	for (int j = 0; j < 10; j++) {
-	    		s += jeu.plateau[i][j] + " ";
+	    		s += getJeu().plateau[i][j] + " ";
 	    	}
 	    }
 	    printWriter.write(s);
@@ -86,8 +98,20 @@ public class Controler {
 	    		l++;
 	    	}
 	    } 
-	    jeu.plateau = plateau;
-	    jeu.coups = new Stack<Coup>();
-	    jeu.dernierCoup = null;
+	    getJeu().plateau = plateau;
+	    getJeu().coups = new Stack<Coup>();
+	    getJeu().dernierCoup = null;
+	}
+	public Jeu getJeu() {
+		return jeu;
+	}
+	public void setJeu(Jeu jeu) {
+		this.jeu = jeu;
+	}
+	public Joueur getCourant() {
+		return courant;
+	}
+	public void setCourant(Joueur courant) {
+		this.courant = courant;
 	}
 }
