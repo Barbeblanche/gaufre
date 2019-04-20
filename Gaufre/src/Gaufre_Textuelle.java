@@ -1,9 +1,9 @@
 import java.io.IOException;
 import java.util.Scanner;
 
-import Controlleur.Controleur;
 import Model.Coup;
 import Model.Jeu;
+import Controler.Controler;
 
 public class Gaufre_Textuelle {
 	final static int ANNULER = -1;
@@ -12,9 +12,9 @@ public class Gaufre_Textuelle {
 	final static int LOAD = -4;
 	
 	public static void main(String args[]) throws IOException {
-		Controleur controleur = new Controleur();
-		
+		Controler controleur = new Controler();
 		System.out.println("Veuillez choisir une case : ");
+		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
 	    int l, c;
 	    

@@ -17,6 +17,7 @@ public class Jeu {
 		initTableau(plateau,10,10);
 		dernierCoup = null;
 	}
+	
 	public void initTableau(int [][] tab,int x,int y) {
 		for (int i = 0; i < x; i ++) {
 			for (int j = 0; j < y; j++) {
@@ -25,9 +26,11 @@ public class Jeu {
 		}
 		tab[0][0] = POISON;
 	}
-	private boolean coupPossible (Coup coup) {
+	
+	public boolean coupPossible (Coup coup) {
 		return (plateau[coup.l][coup.c] == REMPLIE || plateau[coup.l][coup.c] == POISON);
 	}
+	
 	
 	public int joue(Coup coup) {
 		int res=-1;
