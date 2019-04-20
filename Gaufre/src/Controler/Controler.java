@@ -19,6 +19,11 @@ public class Controler {
 		jeu = new Jeu();
 		ia = new IA_Random();
 	}
+	public Controler(Jeu j) {
+		jeu = j;
+		ia = new IA_Random();
+	}
+	
 	
 	public int joue(Coup coup) {
 		int res = jeu.joue(coup);

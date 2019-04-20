@@ -2,6 +2,7 @@ package Vue;
 
 import java.util.ArrayList;
 
+
 import Controler.Controler;
 import Model.Coup;
 import Model.Jeu;
@@ -24,6 +25,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.scene.shape.*;
+import javafx.scene.text.*;
 
 public class InterfaceGraphique extends Application {
 	private static final int WIDTH = 1000;
@@ -31,12 +33,14 @@ public class InterfaceGraphique extends Application {
 	BorderPane root = new BorderPane();
 	Controler controler;
 	Jeu jeu;
+	Rectangle[][] plateauGraphique;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("Gaufre");
 		primaryStage.setFullScreen(false);
-		
+		jeu = new Jeu();
+		controler = new Controler(jeu);
 		initPlateauGauche();
 		initMenuDroite();
 		
@@ -49,7 +53,7 @@ public class InterfaceGraphique extends Application {
 	}
 	
 	private void initPlateauGauche() {
-		Rectangle[][] rectangles = new Rectangle[10][10];
+		plateauGraphique = new Rectangle[10][10];
 		TilePane pane = new TilePane();
 		
 		pane.setHgap(3);
@@ -60,10 +64,14 @@ public class InterfaceGraphique extends Application {
 				Rectangle r = new Rectangle();
 				r.setHeight(50);
 				r.setWidth(50);
+				if (i ==0 && j ==0) {
+					r.setFill(Color.DARKGREEN);  //Case Poison
+				}else {
+					r.setFill(Color.DARKGOLDENROD);
+				}
 				
-				r.setFill(Color.DARKGOLDENROD);
 				
-				rectangles[i][j] = r;
+				plateauGraphique[i][j] = r;
 				
 				pane.getChildren().add(r);
 			}
@@ -73,19 +81,38 @@ public class InterfaceGraphique extends Application {
 
 			@Override
 			public void handle(MouseEvent event) {
-				int l = (int) event.getX() / 50;
-				int c = (int) event.getY() / 50;
+				int l = (int) event.getY() / 50;
+				int c = (int) event.getX() / 50;
+				
 				System.out.println("i = " + l + " j = " + c);
 
 				Coup coup = new Coup(l, c);
-				controler.joue(coup);
-				
+				if (controler.joue(coup) == 1) {
+					pane.getChildren().clear();
+					Text t = new Text(200, 300, "Partie Terminée !");
+					t.setFont(new Font(15));
+					pane.getChildren().add(t);
+				}
+				majPlateau();
 			}
 		});
 	
 		
 		root.setLeft(pane);
 		
+	}
+	
+	//Met le plateauGraphique à jour en fonction du plateau dans Jeu
+	private void majPlateau() {
+		for (int i =0; i<10; i++) {
+			for (int j =0; j<10; j++) {
+				if (jeu.plateau[i][j] == jeu.VIDE) {
+					plateauGraphique[i][j].setFill(Color.WHITE);
+				}else if (jeu.plateau[i][j] == jeu.REMPLIE) {
+					plateauGraphique[i][j].setFill(Color.DARKGOLDENROD);
+				}
+			}
+		}
 	}
 	
 	private void initMenuDroite() {
@@ -101,10 +128,25 @@ public class InterfaceGraphique extends Application {
 		
 		Button b_annuler = new Button("Annuler");
 		b_annuler.setAlignment(Pos.CENTER);
-	
+		b_annuler.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				controler.precedent();
+				majPlateau();
+			}
+		});
 		
 		Button b_refaire = new Button("Refaire");
 		b_refaire.setAlignment(Pos.CENTER);
+		b_refaire.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				controler.refaire();
+				majPlateau();
+			}
+		});
 		
 		Button b_save = new Button("Sauvegarder");
 		b_save.setAlignment(Pos.CENTER);

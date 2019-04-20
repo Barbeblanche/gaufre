@@ -3,9 +3,9 @@ package Model;
 import java.util.Stack;
 
 public class Jeu {
-	final int REMPLIE = 1;
-	final int VIDE = 0;
-	final int POISON = 2;
+	public final int REMPLIE = 1;
+	public final int VIDE = 0;
+	public final int POISON = 2;
 	
 	public int[][] plateau;
 	public Stack<Coup> coups;
