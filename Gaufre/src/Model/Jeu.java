@@ -3,6 +3,8 @@ package Model;
 import java.util.Stack;
 
 public class Jeu {
+	private static volatile Jeu instance = null;
+	
 	public final int REMPLIE = 1;
 	public final int VIDE = 0;
 	public final int POISON = 2;
@@ -11,11 +13,21 @@ public class Jeu {
 	public Stack<Coup> coups;
 	public Coup dernierCoup;
 	
-	public Jeu() {
+	private Jeu() {
 		plateau = new int[10][10];
 		coups = new Stack<Coup>();
 		initTableau(plateau,10,10);
 		dernierCoup = null;
+	}
+	
+	public final static Jeu getInstance() {
+		if (Jeu.instance == null) {
+			synchronized(Jeu.class) {
+				Jeu.instance = new Jeu();
+			}
+		}
+		
+		return Jeu.instance;
 	}
 	
 	public void initTableau(int [][] tab,int x,int y) {

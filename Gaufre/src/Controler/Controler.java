@@ -11,13 +11,14 @@ import Model.Coup;
 import Model.Jeu;
 
 public class Controler {
-	final static String save = "/home/s/saullel/git/gaufre/Gaufre/config/Save";
+	String save;
 	Jeu jeu;
 	IA_Random ia;
 	
 	public Controler() {
-		jeu = new Jeu();
+		jeu = Jeu.getInstance();
 		ia = new IA_Random();
+		save = this.getClass().getClassLoader().getResource("Save.txt").getPath();
 	}
 	public Controler(Jeu j) {
 		jeu = j;
@@ -53,6 +54,8 @@ public class Controler {
 	}
 
 	public void save() throws IOException {
+
+		System.out.println(save);
 		
 		FileWriter fileWriter = new FileWriter(new File(save));
 	    PrintWriter printWriter = new PrintWriter(fileWriter);

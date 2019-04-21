@@ -39,8 +39,9 @@ public class InterfaceGraphique extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("Gaufre");
 		primaryStage.setFullScreen(false);
-		jeu = new Jeu();
+		jeu = Jeu.getInstance();
 		controler = new Controler(jeu);
+	
 		initPlateauGauche();
 		initMenuDroite();
 		
