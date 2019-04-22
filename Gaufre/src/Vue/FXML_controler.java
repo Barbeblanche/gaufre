@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class FXML_controler {
-	
+	InterfaceGraphique inter;
 	@FXML
 	private Button jcj;
 	
@@ -27,7 +27,7 @@ public class FXML_controler {
 	@FXML
 	private void initialize() {
 		jcj.setOnAction((event) -> {
-			InterfaceGraphique inter = new InterfaceGraphique();
+			inter = new InterfaceGraphique();
 			Stage stage = new Stage();
 			try {
 				inter.start(stage);
