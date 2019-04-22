@@ -1,9 +1,9 @@
-import Vue.InterfaceGraphique;
+import Vue.MenuGraphique;
 
 public class Gaufre {
 
 	public static void main(String[] args) {
-		InterfaceGraphique.launch(InterfaceGraphique.class, args);
+		MenuGraphique.launch(MenuGraphique.class, args);
 	}
 
 }

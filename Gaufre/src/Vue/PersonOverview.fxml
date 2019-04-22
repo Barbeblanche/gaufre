@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Vue.FXML_controler">
+   <children>
+      <Button fx:id="jcj" layoutX="225.0" layoutY="187.0" mnemonicParsing="false" onAction="#initialize" text="Joueur contre joueur" />
+      <Button fx:id="jcIA" layoutX="239.0" layoutY="237.0" mnemonicParsing="false" onAction="#initialize" text="Joueur contre IA" />
+      <Button fx:id="regles" layoutX="270.0" layoutY="287.0" mnemonicParsing="false" onAction="#initialize" text="Règles" />
+      <Text layoutX="237.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu">
+         <font>
+            <Font size="46.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

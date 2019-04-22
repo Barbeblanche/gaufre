@@ -49,6 +49,9 @@ public class InterfaceGraphique extends Application {
 		primaryStage.show();
 
 	}
+	public InterfaceGraphique() {
+		
+	}
 	
 	private void initPlateauGauche() {
 		plateauGraphique = new Rectangle[10][10];
