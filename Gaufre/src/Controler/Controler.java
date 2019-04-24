@@ -40,7 +40,6 @@ public class Controler {
 				setCourant(j1);
 			}
 		}
-		System.out.println(getCourant().getNom());
 		return res;
 	}
 	

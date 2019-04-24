@@ -88,14 +88,29 @@ public class InterfaceGraphique extends Application {
 				//System.out.println("i = " + l + " j = " + c);
 
 				Coup coup = new Coup(l, c);
+				
+				//Ecran fin de partie avec bouton rejouer
 				if (controler.joue(coup) == 1) {
 					pane.getChildren().clear();
-					Text t = new Text(200, 300, "Partie Terminée ! " + controler.getCourant().getNom() + " a perdu !" );
-					t.setFont(new Font(15));
-					pane.getChildren().add(t);
+					Text finPartie = new Text(100, 100, "Partie Terminée ! " + controler.getCourant().getNom() + " a perdu !" );
+					finPartie.setTextAlignment(TextAlignment.CENTER);
+					Button rejouer = new Button("Rejouer");
+					rejouer.setAlignment(Pos.CENTER);
+					rejouer.setOnMouseClicked(new EventHandler<MouseEvent>() {
+						@Override
+						public void handle(MouseEvent event) {
+							controler = new Controler();
+							initPlateauGauche();
+							initMenuDroite();
+						}
+					});
+					
+					finPartie.setFont(new Font(15));
+					pane.getChildren().add(finPartie);
+					pane.getChildren().add(rejouer);
 				}
 				majPlateau();
-				joueurCourant.setText("Joueur courant : \n" + controler.getCourant().getNom());
+				
 			}
 		});
 	
@@ -115,6 +130,7 @@ public class InterfaceGraphique extends Application {
 				}
 			}
 		}
+		joueurCourant.setText("Joueur courant : \n" + controler.getCourant().getNom());
 	}
 	
 	private void initMenuDroite() {
@@ -129,6 +145,7 @@ public class InterfaceGraphique extends Application {
 	    menu.setSpacing(10);
 		
 	    joueurCourant = new Text("Joueur courant : \n" + controler.getCourant().getNom());
+	    joueurCourant.setFill(Color.RED);
 	    
 		Button b_annuler = new Button("Annuler");
 		b_annuler.setAlignment(Pos.CENTER);
