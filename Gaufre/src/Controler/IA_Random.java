@@ -16,7 +16,7 @@ public class IA_Random extends IA {
 		Coup coupBas = new Coup(0,1);
 		Coup coupGauche = new Coup(1,0);
 
-		if(j.coupPossible(coupBas))
+		if(j.coupPossible(coupBas) )
 			if (j.coupPossible(coupGauche)){		//on peut jouer un coup non perdant
 			do{
 				coup.l = r.nextInt(9);

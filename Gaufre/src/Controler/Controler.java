@@ -12,17 +12,18 @@ import Model.*;
 
 
 public class Controler {
-	final static String save = "/home/s/saullel/git/gaufre/Gaufre/config/Save";
-	private Jeu jeu;
+	String save;
+	Jeu jeu;
 	IA_Random ia;
 	Joueur j1,j2;
 	private Joueur courant;
 	public Controler() {
-		setJeu(new Jeu());
+		jeu = Jeu.getInstance();
 		ia = new IA_Random();
 		j1 = new Joueur("Joueur 1",jeu);
 		j2 = new Joueur("Joueur 2",jeu);
 		setCourant(j1);
+		save = this.getClass().getClassLoader().getResource("Save.txt").getPath();
 	}
 	public Controler(Jeu j) {
 		setJeu(j);
@@ -64,6 +65,8 @@ public class Controler {
 	}
 
 	public void save() throws IOException {
+
+		System.out.println(save);
 		
 		FileWriter fileWriter = new FileWriter(new File(save));
 	    PrintWriter printWriter = new PrintWriter(fileWriter);
