@@ -74,6 +74,35 @@ public class InterfaceGraphique extends Application {
 				
 				plateauGraphique[i][j] = r;
 				
+				//Pour montrer le coup qui va être joué (cases en surbrillance) 
+				//Variables qui servent à avoir la position du rectangle selectionné (car impossible d'utiliser i et j dans le handler)
+				final int I =i;
+				final int J =j;
+				plateauGraphique[i][j].setOnMouseEntered(new EventHandler<MouseEvent>() {
+					@Override
+					public void handle(MouseEvent event) {
+						for (int x = I; x < 10; x ++) {
+							for (int y = J; y < 10; y++) {
+								if (controler.getJeu().plateau[x][y] == controler.getJeu().REMPLIE) {
+									plateauGraphique[x][y].setFill(Color.LIGHTGREY);
+								}
+							}
+						}
+					}
+				});
+				plateauGraphique[i][j].setOnMouseExited(new EventHandler<MouseEvent>() {
+					
+					@Override
+					public void handle(MouseEvent event) {
+						for (int x = I; x < 10; x ++) {
+							for (int y = J; y < 10; y++) {
+								if (controler.getJeu().plateau[x][y] == controler.getJeu().REMPLIE) {
+									plateauGraphique[x][y].setFill(Color.DARKGOLDENROD);
+								}
+							}
+						}
+					}
+				});
 				pane.getChildren().add(r);
 			}
 		}
@@ -124,7 +153,7 @@ public class InterfaceGraphique extends Application {
 		for (int i =0; i<10; i++) {
 			for (int j =0; j<10; j++) {
 				if (controler.getJeu().plateau[i][j] == controler.getJeu().VIDE) {
-					plateauGraphique[i][j].setFill(Color.LIGHTGREY);
+					plateauGraphique[i][j].setFill(Color.DARKGRAY);
 				}else if (controler.getJeu().plateau[i][j] == controler.getJeu().REMPLIE) {
 					plateauGraphique[i][j].setFill(Color.DARKGOLDENROD);
 				}
@@ -168,6 +197,16 @@ public class InterfaceGraphique extends Application {
 				majPlateau();
 			}
 		});
+		Button b_nvPartie = new Button("New Game");
+		b_nvPartie.setAlignment(Pos.CENTER);
+		b_nvPartie.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				controler = new Controler();
+				majPlateau();
+			}
+		});
 		
 		Button b_save = new Button("Sauvegarder");
 		b_save.setAlignment(Pos.CENTER);
@@ -180,6 +219,7 @@ public class InterfaceGraphique extends Application {
 		menu.getChildren().add(b_refaire);
 		menu.getChildren().add(b_save);
 		menu.getChildren().add(b_load);
+		menu.getChildren().add(b_nvPartie);
 		menu.setStyle("-fx-border-style: solid");
 		
 		root.setRight(menu);

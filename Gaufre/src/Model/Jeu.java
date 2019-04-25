@@ -8,7 +8,7 @@ public class Jeu {
 	public final int POISON = 2;
 	
 	public int[][] plateau;
-	
+	Stack<Coup> tmp;
 	public Jeu() {
 		plateau = new int[10][10];
 		initTableau(plateau,10,10);
@@ -53,7 +53,7 @@ public class Jeu {
 		if (!coups.empty()) {
 			dernierCoup = coups.pop();
 			initTableau(plateau,10,10);
-			Stack<Coup> tmp = new Stack<Coup>();
+			tmp = new Stack<Coup>();
 			tmp = coups;
 			while (!tmp.empty()) {
 				joue(tmp.pop(),coups);
