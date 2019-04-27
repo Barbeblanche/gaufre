@@ -30,27 +30,41 @@ import javafx.scene.text.*;
 public class InterfaceGraphique extends Application {
 	private static final int WIDTH = 1000;
 	private static final int HEIGHT = 600;
-	BorderPane root = new BorderPane();
+	BorderPane root;
 	Controler controler;
 	Rectangle[][] plateauGraphique;
 	Text joueurCourant;
+	Button rejouer;
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		primaryStage.setTitle("Gaufre");
-		primaryStage.setFullScreen(false);
+		startGame(primaryStage);
+
+	}
+	public InterfaceGraphique() {
+		
+	}
+
+	public void startGame(Stage stage) {
+		root = new BorderPane();
+		stage.setTitle("Gaufre");
+		stage.setFullScreen(false);
 		controler = new Controler();
 		initPlateauGauche();
 		initMenuDroite();
 		
 
 		Scene scene = new Scene(root);
-
-		primaryStage.setScene(scene);
-		primaryStage.show();
-
-	}
-	public InterfaceGraphique() {
+		rejouer = new Button("Rejouer");
+		rejouer.setOnAction(e -> {
+		       restart(stage);
+	    });
+		stage.setScene(scene);
+		stage.show();
 		
+	}
+	
+	public void restart(Stage stage) {
+		startGame(stage);
 	}
 	
 	private void initPlateauGauche() {
@@ -123,16 +137,7 @@ public class InterfaceGraphique extends Application {
 					pane.getChildren().clear();
 					Text finPartie = new Text(100, 100, "Partie Terminée ! " + controler.getCourant().getNom() + " a perdu !" );
 					finPartie.setTextAlignment(TextAlignment.CENTER);
-					Button rejouer = new Button("Rejouer");
 					rejouer.setAlignment(Pos.CENTER);
-					rejouer.setOnMouseClicked(new EventHandler<MouseEvent>() {
-						@Override
-						public void handle(MouseEvent event) {
-							controler = new Controler();
-							initPlateauGauche();
-							initMenuDroite();
-						}
-					});
 					
 					finPartie.setFont(new Font(15));
 					pane.getChildren().add(finPartie);
@@ -204,7 +209,6 @@ public class InterfaceGraphique extends Application {
 			@Override
 			public void handle(MouseEvent event) {
 				controler = new Controler();
-				majPlateau();
 			}
 		});
 		

@@ -18,7 +18,8 @@ public class Controler {
 	Joueur j1,j2;
 	private Joueur courant;
 	public Controler() {
-		jeu = Jeu.getInstance();
+		//jeu = Jeu.getInstance(); Bug au niveau de rejouer
+		jeu = new Jeu();
 		ia = new IA_Random();
 		j1 = new Joueur("Joueur 1",jeu);
 		j2 = new Joueur("Joueur 2",jeu);
