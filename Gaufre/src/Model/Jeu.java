@@ -41,7 +41,7 @@ public class Jeu {
 	}
 	
 	
-	public int joue(Coup coup,Stack<Coup> coups) {
+	public int joue(Coup coup, Stack<Coup> coups) {
 		int res=-1;
 		if (coupPossible(coup)) {
 			coups.push(coup);

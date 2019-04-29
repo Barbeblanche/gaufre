@@ -2,6 +2,8 @@ package Model;
 
 import java.util.Stack;
 
+import Controler.IA;
+
 public class Joueur {
 	private String nom;
 	Jeu jeu;
@@ -10,6 +12,13 @@ public class Joueur {
 	
 	public Joueur(Jeu j) {
 		setNom("Joueur");
+		jeu = j;
+		coups = new Stack<Coup>();
+		dernierCoup = null;
+	}
+	
+	public Joueur(IA ia, Jeu j) {
+		setNom("IA");
 		jeu = j;
 		coups = new Stack<Coup>();
 		dernierCoup = null;

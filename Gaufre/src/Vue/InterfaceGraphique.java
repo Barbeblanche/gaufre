@@ -133,15 +133,20 @@ public class InterfaceGraphique extends Application {
 				Coup coup = new Coup(l, c);
 				
 				//Ecran fin de partie avec bouton rejouer
-				if (controler.joue(coup) == 1) {
-					pane.getChildren().clear();
-					Text finPartie = new Text(100, 100, "Partie Terminée ! " + controler.getCourant().getNom() + " a perdu !" );
-					finPartie.setTextAlignment(TextAlignment.CENTER);
-					rejouer.setAlignment(Pos.CENTER);
-					
-					finPartie.setFont(new Font(15));
-					pane.getChildren().add(finPartie);
-					pane.getChildren().add(rejouer);
+				try {
+					if (controler.joue(coup) == 1) {
+						pane.getChildren().clear();
+						Text finPartie = new Text(100, 100, "Partie Terminée ! " + controler.getCourant().getNom() + " a perdu !" );
+						finPartie.setTextAlignment(TextAlignment.CENTER);
+						rejouer.setAlignment(Pos.CENTER);
+						
+						finPartie.setFont(new Font(15));
+						pane.getChildren().add(finPartie);
+						pane.getChildren().add(rejouer);
+					}
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 				majPlateau();
 				

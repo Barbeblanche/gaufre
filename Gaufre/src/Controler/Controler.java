@@ -16,34 +16,51 @@ public class Controler {
 	Jeu jeu;
 	IA_Random ia;
 	Joueur j1,j2;
+	boolean jcIA = false;
 	private Joueur courant;
 	public Controler() {
 		//jeu = Jeu.getInstance(); Bug au niveau de rejouer
 		jeu = new Jeu();
-		ia = new IA_Random();
+		ia = new IA_Random(jeu);
 		j1 = new Joueur("Joueur 1",jeu);
 		j2 = new Joueur("Joueur 2",jeu);
+		
 		setCourant(j1);
 		save = this.getClass().getClassLoader().getResource("Save.txt").getPath();
 	}
 	public Controler(Jeu j) {
 		setJeu(j);
-		ia = new IA_Random();
+		ia = new IA_Random(j);
 		setCourant(j1);
 	}
 	
+	public void setModeJeu(String mode) {
+		if (mode == "IA") {
+			j2 = new Joueur(ia, jeu);
+			jcIA = true;
+		}
+	}
 	
-	public int joue(Coup coup) {
+	
+	public int joue(Coup coup) throws InterruptedException {
 		int res = getCourant().jouer(coup);
-		if (res == 0) {
-			if (getCourant() == j1) {
-				setCourant(j2);
-			}else {
-				setCourant(j1);
+		
+		if (jcIA == false) {
+			if (res == 0) {
+				if (getCourant() == j1) {
+					setCourant(j2);
+	
+				} else {
+					setCourant(j1);
+				}
 			}
+		} else {
+			res = j2.jouer(ia.getCoup());
+			if (res == 1) setCourant(j2);
 		}
 		return res;
 	}
+	
 	
 	/*private void click(Coup coup) {
 		getJeu().joue(coup);

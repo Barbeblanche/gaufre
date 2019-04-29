@@ -40,7 +40,15 @@ public class FXML_controler {
 		});
 		
 		jcIA.setOnAction((event) -> {
-			jcIA.setText("Not implemented");
+			inter = new InterfaceGraphique();
+			Stage stage = new Stage();
+			try {
+				inter.start(stage);
+				inter.controler.setModeJeu("IA");
+				((Node)(event.getSource())).getScene().getWindow().hide();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		});
 		
 		regles.setOnAction((event) -> {
